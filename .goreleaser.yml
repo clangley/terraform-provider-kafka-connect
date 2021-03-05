@@ -22,18 +22,8 @@ builds:
 archives:
 - format: zip
   name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
-
 checksum:
   name_template: '{{ .ProjectName }}_{{ .Version }}_SHA256SUMS'
   algorithm: sha256
-signs:
-  - artifacts: checksum
-    args:
-      - "--local-user"
-      - "A29F60D591A974E20B5E90695C886ACC44EB17C0"
-      - "--output"
-      - "${signature}"
-      - "--detach-sign"
-      - "${artifact}"
 snapshot:
   name_template: "{{ .Version }}-next"
