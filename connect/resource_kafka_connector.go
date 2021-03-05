@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	kc "github.com/ricardo-ch/go-kafka-connect/lib/connectors"
@@ -81,7 +82,9 @@ func connectorCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	if err != nil {
-		return err
+		if !strings.Contains(err.Error(), "already exists") {
+			return err
+		}
 	}
 
 	return connectorRead(d, meta)
